@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>Current</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" type="text/css">
+    <!-- <script type="text/javascript" src="script.js"></script> -->
+	<link rel="manifest" href="/manifest.json">
+    
+</head>
+    
+<body>
+    <div class="Title-Bar">
+        <img src="Pictures/Parking.png" id="Logo">
+        <span id="Title">Jadewell Parking</span>
+    </div>
+    
+    <div class="Buttons">
+        <button class="Current-Container">
+            <a href="index.html">
+                <img src="Pictures/Current.png" class="Button-Logo">
+            </a>
+                <p class="Button-Text">Current</p>
+            
+        </button>
+            
+        <button class="Recent-Container">
+            <a href="Recent.html">
+                <img src="Pictures/Recent.png" class="Button-Logo">
+            </a>
+                <p class="Button-Text">Recent</p>
+            
+        </button>            
+            
+        <button class="Summary-Container">
+            <a href="Summary.html">
+            <img src="Pictures/Summary.png" class="Button-Logo">
+            </a>
+            <p class="Button-Text" id="Summary-Text">Summary</p>
+        </button>
+    </div>
+    
+    <form class="Plate">
+        <input type="text" placeholder="Enter Plate Number" name="search" id="Enter-Plate-Number">
+    </form>
+    
+    <form class="Plate">
+        <input type="text" placeholder="Search Plate Number" name="search" id="Search-Plate-Number">
+    </form>
+    
+    <form class="Start-Time-Button">
+        <button type="button" value="Start Time" id="Start-Time" class="All-Button" onclick="getTimeIn()">Start Time</button>
+    </form>
+    
+    <form class="Button-Enter-Plate">
+        <button type="reset" value="Cancel" id="Cancel" class="All-Button" onclick="getTimeIn()">Cancel</button>
+        <button type="button" value="Search" id="Search" class="All-Button" onclick="searchPlateNumber()">Search</button>
+    </form>
+    
+    
+    <hr>
+    
+    <table id="Parking-Table">
+        <tr>
+            <th>Plate Number</th>
+            <th>Time in</th>
+            <th>Parking Charge</th>
+            <th>Time out</th>
+        </tr>     
+    </table>
+	
+<script>
+var timeIn, timeInms, timeOut, timeOutms, timeParked, timeParkedms;
+var table = document.getElementById("Parking-Table");
+var row;
+var plateNumberCell, timeInCell, timeOutCell;
+var parkingChargeCell = 35;
+
+var pnArr = [];
+var tiArr = [];
+var pcArr = [];
+var toArr = [];
+
+function getTimeParked(){
+	//timeIn = new Date("March 31, 2018 01:25:10");
+	//timeInms = timeIn.getTime(timeIn);
+	//timeOut = new Date("March 31, 2018 04:25:18");	
+	//timeOutms = timeOut.getTime(timeOut);
+
+	var diff = timeOutms - timeInms;
+	var seconds = 1000;
+	var minutes = seconds*60;
+	var hours = minutes*60;
+
+	console.log(timeIn);
+	console.log(timeOut);
+
+	//timeParked = formatNum((Math.trunc(diff/hours))%60) +":" + formatNum((Math.trunc(diff/minutes))%60) +":" + formatNum((Math.trunc(diff/seconds))%60);
+	//parkingChargeCell.innerHTML;
+	
+	
+	//Compute Parking Charge
+	if (diff < (2000*60*60)){
+		console.log(parkingChargeCell.innerHTML);
+		parkingChargeCell.innerHTML = 35;
+		parkingChargeCell.innerHTML;
+	}  else if (diff > (2000*60*60) && diff < (3000*60*60)) {
+		parkingChargeCell.innerHTML = 45;
+		parkingChargeCell.innerHTML;
+	}else if (diff > (3000*60*60) && diff < (4000*60*60)) {
+		parkingChargeCell.innerHTML = 55;
+		parkingChargeCell.innerHTML;
+	} else if (diff > (4000*60*60) && diff < (5000*60*60)) {
+		parkingChargeCell.innerHTML = 65;
+		parkingChargeCell.innerHTML;
+	} else if (diff > (5000*60*60) && diff < (6000*60*60)) {
+		parkingChargeCell.innerHTML = 75;
+		parkingChargeCell.innerHTML;
+	} else if (diff > (6000*60*60) && diff < (7000*60*60)) {
+		parkingChargeCell.innerHTML = 85;
+		parkingChargeCell.innerHTML;
+	} else if (diff > (7000*60*60) && diff < (8000*60*60)) {
+		parkingChargeCell.innerHTML = 95;
+		parkingChargeCell.innerHTML;
+	} else if (diff > (8000*60*60) && diff < (9000*60*60)) {
+		parkingChargeCell.innerHTML = 105;
+		parkingChargeCell.innerHTML;
+	} else if (diff > (9000*60*60) && diff < (10000*60*60)) {
+		parkingChargeCell.innerHTML = 115;
+		parkingChargeCell.innerHTML;
+	} else if (diff > (10000*60*60) && diff < (11000*60*60)) {
+		parkingChargeCell.innerHTML = 125;
+		parkingChargeCell.innerHTML;
+	} else if (diff > (11000*60*60) && diff < (12000*60*60)) {
+		parkingChargeCell.innerHTML = 135;
+		parkingChargeCell.innerHTML;
+	}
+	//table.deleteRow(1);
+	
+}
+
+function addPay() {
+	parkingChargeCell = parkingChargeCell + 10;
+}
+
+function getTimeIn() {
+	timeIn = new Date();
+	timeInms= timeIn.getTime(timeIn);
+	//setInterval("increment()", (1000 * 60 * 60));
+	row = table.insertRow(1);
+	
+	//insert row cells
+	var plateNumberCell = row.insertCell(0);
+	plateNumberCell.style.textAlign = 'center';
+	var timeInCell = row.insertCell(1);
+	timeInCell.style.textAlign = 'center';
+	parkingChargeCell = row.insertCell(2);
+	parkingChargeCell.style.textAlign = 'center';
+	var timeOutCell = row.insertCell(3);
+	timeOutCell.style.textAlign = 'center';
+	
+	//insert row values
+	plateNumberCell.innerHTML = document.getElementById("Enter-Plate-Number").value;
+	pnArr.unshift(plateNumberCell.innerHTML);
+	timeInCell.innerHTML = formatNum(timeIn.getHours()) +":" + formatNum(timeIn.getMinutes()) +":" + formatNum(timeIn.getSeconds());
+	tiArr.unshift(timeInCell.innerHTML);
+	parkingChargeCell.innerHTML = " ";
+	
+	var btn = document.createElement('input');
+	btn.setAttribute('type', 'button');
+	btn.setAttribute('name', 'ewan');
+	btn.setAttribute('value', 'Time Out');
+	btn.onclick = function() {
+		getTimeOut();
+		getTimeParked();
+	}
+	timeOutCell.appendChild(btn);
+}
+
+function getTimeOut() {
+    timeOut = new Date();
+	timeOutms= timeOut.getTime(timeOut);
+    var t = formatNum(timeOut.getHours()) +":" + formatNum(timeOut.getMinutes()) +":" + formatNum(timeOut.getSeconds());
+	toArr.unshift(t);
+}
+
+function formatNum(num){
+	if((num+"").length == 1){
+		return "0"+num;
+	}else{
+		return num;
+	}	
+}
+
+function searchPlateNumber() {
+	var plateNumber = document.getElementById("Search-Plate-Number").value;
+	var result = pnArr.filter(pn => pn == plateNumber);
+	if (result == plateNumber){alert('Existing plate number')} else { alert('Plate number does not exist')};
+}
+</script>
+    
+</body>
+</html>
